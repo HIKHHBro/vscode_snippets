@@ -1,0 +1,220 @@
+{
+
+    "#ifndef … #define … #endif":{
+      "prefix": "def",
+      "body": "#ifndef ${1:SYMBOL}\n#define $1 ${2:value}\n#endif\t// ${1:SYMBOL}"
+    },
+    "#include <>":{
+      "prefix": "Inc",
+      "body": "#include <${1:.h}>"
+    },
+
+
+    "main()":{
+      "prefix": "main",
+      "body": "int main(int argc, char const *argv[]) \n{\n\t$1\n\treturn 0;\n}"
+    },
+    "For Loop":{
+      "prefix": "for",
+      "body": "for (${1:i} = 0; ${1:i} < ${2:count}; ${1:i}${3:++}) \n{\n\t$4\n}"
+    },
+
+
+    "Typedef Struct":{
+      "prefix": "tys",
+      "body": "typedef struct ${1:}\n{\n\t$2\n}${1:};"
+    },
+    "Do While Loop":{
+      "prefix": "do",
+      "body": "do\n{\n\t$0\n} while($1);"
+    },
+    "While Loop":{
+      "prefix": "while",
+      "body": "while ($1) \n{\n\t$2\n}"
+    },
+
+    "If Condition":{
+      "prefix": "if",
+      "body": "if ($1) \n{\n\t$2\n}"
+    },
+    "If Else":{
+      "prefix": "if1",
+      "body": "if ($1) \n{\n\t$2\n} \nelse \n{\n\t$3\n}"
+    },
+    "If ElseIf":{
+      "prefix": "if2",
+      "body": "if ($1) \n{\n\t$2\n} \nelse if ($3) \n{\n\t$4\n} \nelse \n{\n\t$5\n}"
+    },
+    "If ElseIf Else":{
+      "prefix": "if3",
+      "body": "if ($1) \n{\n\t$2\n} \nelse if ($3) \n{\n\t$4\n} \nelse if ($5) \n{\n\t$6\n} \nelse \n{\n\t$7\n}"
+    },
+    "Switch Statement":{
+      "prefix": "sw",
+      "body": "switch ($1) \n{\n\t$2\n\tdefault: 0\n\t\t${3:break;}\n}$0"
+    },
+    "Switch Statement cs1":{
+      "prefix": "sw1",
+      "body": "switch ($1) \n{\n\tcase $2:\n\t$3\n\t\tbreak;\n\tdefault: ${4:0}\n\t\tbreak;\n}$0"
+    },
+    "Switch Statement cs2":{
+      "prefix": "sw2",
+      "body": "switch ($1) \n{\n\tcase $2:\n\t$3\n\t\tbreak;\n\tcase $4:\n\t$5\n\t\tbreak;\n\tdefault: ${6:0}\n\t\tbreak;\n}$0"
+    },
+    "Switch Statement cs3":{
+      "prefix": "sw3",
+      "body": "switch ($1) \n{\n\tcase $2:\n\t$3\n\t\tbreak;\n\tcase $4:\n\t$5\n\t\tbreak;\n\tcase $6:\n\t$7\n\t\tbreak;\n\tdefault: ${8:0}\n\t\tbreak;\n}$0"
+    },
+    "case break":{
+      "prefix": "cs",
+      "body": "case $1:\n\t$2\n\tbreak;\n$0"
+    },
+    "printf":{
+      "prefix": "printf",
+      "body": "printf(\"${1:%s }\\n\", $2);$3"
+    },
+    "scanf":{
+      "prefix": "scanf",
+      "body": "scanf(\"${1:%s}\\n\", $2);$3"
+    },
+
+    "void":{
+      "prefix": "void",
+      "body": "void ${1:name}($2) {\n\t$3\n}"
+    },
+    "any function":{
+      "prefix": "func",
+      "body": "${1:int} ${2:name}($3) {\n\t$5\n\treturn ${4:0};\n}"
+    },
+    "write file":{
+      "prefix": "wf",
+      "body": "FILE *${1:fp};\n${1:fp} = fopen (\"${2:filename.txt}\",\"w\");\nif (${1:fp}!=NULL)\n{\n\tfprintf(${1:fp},\"${3:Some String\\\\n}\");\n\tfclose (${1:fp});\n}"
+    },
+    "read file":{
+      "prefix": "rf",
+      "body": "FILE *${1:fp};\n${1:fp} = fopen (\"${2:filename.txt}\",\"r\");\nif (${1:fp}!=NULL)\n{\n\tfscanf(${1:fp},\"${3:Some String\\\\n}\", ${3:&var});\n\tfclose (${1:fp});\n}",
+      "description": "read file opeartion including fopen, fscanf and fclose."
+    },
+
+    "function commets":{
+      "prefix": "fcommets",
+      "body": [
+                  "/**",
+                  "  * @Data    $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE",
+                  "  * @brief   $1",  
+                  "  * @param   ${2:void}",
+                  "  * @retval  ${3:void}",
+                  "  */",
+                  "\t${3:void} ${4:name}(${2:void})",
+                  "\t{\n\t\t$5\n\t}"
+      ]
+    },
+
+    "commets":{
+      "prefix": "commets",
+      "body": "/* -------------- ${1:} ----------------- */\n\t$0"
+
+    },
+    "filecommet":{
+      "prefix": "filecommet",
+      "body": [
+              "/**",
+              "  |--------------------------------- Copyright --------------------------------|",
+              "  |                                                                            |",
+              "  |                      (C) Copyright $CURRENT_YEAR,海康平头哥,                         |",
+              "  |           1 Xuefu Rd, Huadu Qu, Guangzhou Shi, Guangdong Sheng, China      |"    , 
+              "  |                           All Rights Reserved                              |",
+              "  |                                                                            |"    ,                          
+              "  |           By(GCU The wold of team | 华南理工大学广州学院机器人野狼队)         |",
+              "  |                    https://github.com/GCUWildwolfteam                      |",
+              "  |----------------------------------------------------------------------------|" ,  
+              "  |--FileName    : $TM_FILENAME                                              ",
+              "  |--Version     : v1.0                                                          ",	
+              "  |--Author      : 海康平头哥                                                     ",			
+              "  |--Date        : $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE             ",
+              "  |--Libsupports : ",
+              "  |--Description :                                                     "  , 
+              "  |--FunctionList                                                     "  ,
+              "  |-------1. ....                                                     ",
+              "  |          <version>:                                                     " ,		
+              "  |     <modify staff>:                                                       ",
+              "  |             <data>:                                                       ",
+              "  |      <description>:                                                        " ,
+              "  |-------2. ...                                                       ",
+              "  |-----------------------------declaration of end-----------------------------|",
+              " **/",
+              "#include \"$TM_FILENAME_BASE.h\" ",
+              "\t$0",
+              "/*-----------------------------------file of end------------------------------*/" , 
+              "\n\n"
+     ]
+
+    },
+
+
+    "headcommet":{
+      "prefix": "headcommet",
+      "body": [
+              "/**",
+              "  |--------------------------------- Copyright --------------------------------|",
+              "  |                                                                            |",
+              "  |                      (C) Copyright $CURRENT_YEAR,海康平头哥,                         |",
+              "  |           1 Xuefu Rd, Huadu Qu, Guangzhou Shi, Guangdong Sheng, China      |"    , 
+              "  |                           All Rights Reserved                              |",
+              "  |                                                                            |"    ,                          
+              "  |           By(GCU The wold of team | 华南理工大学广州学院机器人野狼队)         |",
+              "  |                    https://github.com/GCUWildwolfteam                      |",
+              "  |----------------------------------------------------------------------------|" ,  
+              "  |--FileName    : $TM_FILENAME                                                ",
+              "  |--Version     : v1.0                                                            ",	
+              "  |--Author      : 海康平头哥                                                       ",			
+              "  |--Date        : $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE               ",  
+              "  |--Libsupports : "  ,  				
+              "  |--Description :                                                       "  , 
+              "  |--FunctionList                                                       "  ,
+              "  |-------1. ....                                                       ",
+              "  |          <version>:                                                       " ,		
+              "  |     <modify staff>:                                                       ",
+              "  |             <data>:                                                       ",
+              "  |      <description>:                                                        " ,
+              "  |-------2. ...                                                       ",
+              "  |-----------------------------declaration of end-----------------------------|",
+              " **/",
+              "#ifndef ${1:__${TM_FILENAME/(.*)\\.H$/${1:/upcase}_H/i}} \n#define $1",
+              "/*------------------------------------  宏定义  -------------------------------*/",
+              " #define$0",
+              "/*---------------------------------  结构体声明  ------------------------------*/",
+              "/*-----------------------------------  函数声明  ------------------------------*/",
+              "#endif",
+              "/*-----------------------------------file of end------------------------------*/" , 
+              "\n\n"
+              
+     ]
+
+    },
+    "blockcommets":{
+      "prefix": "blockcommets",
+      "body": [
+          "/* =========================== $1 of begin =========================== */",
+          "\t$0",
+          "/* =========================== $1 of end =========================== */",
+          "\n"
+      ]
+    },
+
+    "commetmin":{
+      "prefix": "commetmin",
+      "body": [
+          "/* ------ $1 ------- */",
+          "\t$0"
+      ]
+    }
+    "commetsin":{
+          "prefix": "commetsin",
+          "body": [
+              "/*$1*/",
+              "\t$0"
+          ]
+          }		  	
+
+}
